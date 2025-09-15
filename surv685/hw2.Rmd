@@ -1,0 +1,41 @@
+---
+title: "HW2"
+author: "Mauro Gonzalez"
+date: "2025-09-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(faraway)
+
+```
+
+**Q1A.** *What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification?*
+
+Flexible methods can more realistic, as there can be a variety of factors that influence outcomes, as opposed to only one or two. However, such flexible models can be overly-complex and less-readiable. There is also the potential of "overfitting" a model, in which the model reacts to random noise and various minutia, decreasing its use.
+
+**Q1B.** *Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?*
+
+Given the more exact nature of flexible approaches, they may be useful in more 'academic' contexts - where extrmely accurate forecasting is required. Meanwhile, less flexible approaches may be useful to figure out if general inferences hold up, see the direction of trends, and so on.
+
+**Q2A**
+
+```{r}
+lm(wage ~ educ+exper, data = uswages)
+
+lm(wage~educ, data=uswages)
+```
+
+Holding experience constant, each additional year of education is associated with an increased \$51.175 in wages
+
+**Q2B**
+
+```{r}
+uswages$loggedwage <- log(uswages$wage)
+lm(loggedwage ~ educ+exper, data=uswages)
+```
+
+Hold experience constant, each additional year of education is associated with a 9% increase in wages
+
+Q2C: The model in 2A is more natural, due to the fact that it is easier to visualize specific dollar amounts as opposed to a percentage/logged increase.

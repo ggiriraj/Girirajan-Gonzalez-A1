@@ -1,0 +1,88 @@
+---
+title: "HW1"
+author: "Mauro Gonzalez"
+date: "2025-09-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(faraway)
+library("plotrix")
+```
+
+**Q1**
+
+```{r}
+hprice$homeprice<-exp(hprice$narsp)*1000
+
+mean(hprice$homeprice)
+
+var(hprice$homeprice)
+
+#This means that the average home price in the dataset is $94,411. 
+#However, there is a wide range of home prices:
+#over 1.5 billion (1583110349)
+```
+
+**Q2**
+
+```{r}
+t.test(hprice$homeprice)
+#The confidence interval is [90062,98760.14] 
+#Meaning that a vast majority of home prices will fall in between that range. 
+```
+
+**Q3**
+
+```{r}
+mean(hprice$homeprice [hprice$ajwtr==1])
+std.error(hprice$homeprice [hprice$ajwtr==1])
+```
+
+**Q4**
+
+```{r}
+msacoast <- mean(hprice$homeprice [hprice$ajwtr==1])
+msainland <- mean(hprice$homeprice [hprice$ajwtr==0])
+msacoast - msainland
+
+
+#This question requires taking the mean price of coastline-adjacenet 
+#and inland MSA home prices, and then subtracting one from the other. 
+#I hypothesize that coastal MSA home prices will be higher. 
+#This hypothesis is proven true: 
+#subtracting inland prices from coastal prices gives a $28,854.07 difference.
+```
+
+**Q5**
+
+```{r}
+cor(hprice$homeprice, hprice$ypc, method=c("pearson"))
+```
+
+**Q6**
+
+```{r}
+cor(hprice$homeprice, hprice$ypc)
+#There is a strong positive correlation between home price and per captia income.
+
+```
+
+**Q7**
+
+```{r}
+#There is an effect of per capita income on home sale price. 
+#In a correlation, x's effect on y is equal to y's effect on x 
+#(in this case, with a high coefficient score)
+```
+
+**Q8**
+
+```{r}
+shapiro.test(hprice$homeprice)
+#This would not change my responses. 
+#While the data is evidently not normally distributed, this does not 
+#necessarily change any previous answers.
+#However it does mean that measures like "mean" and "variance" are less useful than median.
+```
